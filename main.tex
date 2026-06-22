@@ -1,0 +1,105 @@
+%!TEX root = main.tex
+%!TEX encoding = UTF-8
+%!TEX spellcheck = en_US
+
+
+% === 文件说明 ===
+% 北京大学博士学位论文主文件
+% 依据《北京大学研究生学位论文写作指南》（2014版）调整格式。
+% 编译器: xelatex
+
+%% 全局环境配置 
+\documentclass[12pt,a4paper,openany,twoside]{ctexbook}
+\input{setup.tex}   
+
+\setblindreview{0} % 1:盲审版, 0:正式版
+
+\begin{document}
+
+%% 封面 (中英文封面) & 版权声明
+\input{data/cover} 
+\ifblindreview
+    \makecoverBR % 匿名评审封面
+    %\includepdf{AddPages/copyrightBR.pdf} % 匿名评审版权声明
+\else
+    \makecover   % 正式封面
+    \includepdf{AddPages/copyright.pdf} % 版权声明
+\fi
+\cleardoublepage
+
+%% 页眉页脚设置（符合指南 1.11 节）
+\frontmatter
+\pagenumbering{Roman}
+\renewcommand{\headrulewidth}{0.75pt}
+\fancyhead[CE]{\typeyemei 北京大学博士学位论文}  % 偶数页：固定文本
+\renewcommand{\chaptermark}[1]{\markboth{第\CJKnumber{\arabic{chapter}}章\enspace #1}{}}
+\fancyhead[CO]{\typeyemei\leftmark}  % 奇数页：章节名
+\renewcommand{\headrule}{\makeheadrule}
+\fancyfoot[CO,CE]{\typeyejiao\thepage}  % 页脚页码
+
+%% 摘要
+\include{data/abstract}
+\input{data/cover} 
+\ifblindreview
+    \makeabstractBR % 匿名评审摘要
+\else
+    \makeabstract   % 正式摘要
+\fi
+
+
+%% 正文格式设置
+\renewcommand{\baselinestretch}{1} % 正文行距
+\fontsize{12pt}{20pt}\selectfont % 字号小四(12pt)
+
+%% 目录
+\tableofcontents\cleardoublepage
+
+%% 可选目录（如需使用请取消注释）
+%\listoftables              % 表格目录
+%\thispagestyle{empty}
+\listoffigures              % 插图目录
+\cleardoublepage
+\thispagestyle{empty}
+\include{data/denotation}   % 符号对照表
+\cleardoublepage
+
+%% 正文部分
+\mainmatter
+\include{data/chap1}\cleardoublepage
+\include{data/chap2}\cleardoublepage
+\include{data/chap3}\cleardoublepage
+\include{data/chap4}\cleardoublepage
+\include{data/chap5}\cleardoublepage
+
+%% 参考文献（指南 1.8 节）
+\phantomsection
+%\nocite{*}
+\addcontentsline{toc}{chapter}{参考文献}
+{\typebib
+ \bibliography{data/reference}}
+\cleardoublepage
+
+%% 附录（指南 1.9 节）
+\begin{appendix}
+    \renewcommand{\chaptermark}[1]{\markboth{附录\Alph{chapter}\enspace #1}{}}
+    \input{data/appendix_A}
+\end{appendix}
+\cleardoublepage
+
+%% 个人简历、在学期间成果
+\ifblindreview
+    \include{data/resumeBR} % 盲审版本
+\else
+    \include{data/resume}   % 正式版本
+    \cleardoublepage
+\fi
+
+%% 致谢和原创性声明（仅在正式版本中包含）
+\ifblindreview
+    % 盲审版本跳过此部分
+\else
+    %% 致谢（指南 1.10 节）
+    \include{data/acknowledgements}\cleardoublepage
+\fi
+
+\end{document}

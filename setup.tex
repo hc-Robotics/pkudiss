@@ -1,0 +1,557 @@
+% !TeX encoding = UTF-8
+% !TeX spellcheck = en_US
+
+% === 文件说明 ===
+% 此文件为北京大学学位论文的 LaTeX 全局配置，包含宏包引用、页面设置、字体定义等。
+% 依据《北京大学研究生学位论文写作指南》（2014版）调整格式。
+% 编译要求：建议使用 XeLaTeX。
+
+%% ====== 宏包引用 ======
+% 基础宏包
+\usepackage{graphicx}        % 图形支持
+\usepackage{color}           % 颜色支持
+\usepackage{url}             % URL处理
+\usepackage{indentfirst}     % 首行缩进
+% 数学和公式相关
+\usepackage{amsmath}         % 数学公式
+\usepackage{amssymb}         % 数学符号
+\usepackage{xfrac}           % 行内分式
+\usepackage{bm}              % 数学粗体
+\usepackage{siunitx}         % 科学计数法和单位
+\usepackage[amsmath,thmmarks]{ntheorem} % 定理环境
+\usepackage[b]{esvect}       % 箭头样式
+% 页面布局和格式 （指南 1.11 节）
+\usepackage[a4paper,
+            left=2.6cm, right=2.6cm, top=3.15cm, bottom=2.5cm,
+            headsep=0.4cm, headheight=0.75cm,
+            footskip=0.75cm, footnotesep=0.6cm]{geometry} % 页面布局
+\usepackage{setspace}        % 行距设置
+\usepackage{fancyhdr}        % 页眉页脚
+\usepackage{titletoc}        % 目录格式
+\usepackage{ragged2e}        % 对齐方式
+% 字体和中文支持
+\usepackage{fontspec}        % 字体设置
+\usepackage{CJKnumb}         % 中文数字
+\usepackage{cjkhl}           % 中文高亮
+% 浮动对象和图表
+\usepackage{rotating}        % 纵向插图
+\usepackage{caption}         % 图表标题
+\usepackage{subcaption}      % 子图标题
+\usepackage{float}           % 浮动控制
+\usepackage[below]{placeins} % 浮动位置
+\usepackage{tikz}
+% 表格相关
+\usepackage{booktabs}        % 表格线
+\usepackage{multirow}        % 表格合并
+\usepackage{array}           % 表格列格式
+\usepackage{diagbox}         % 斜线单元格
+\usepackage{makecell}
+% 参考文献和索引
+\usepackage[sort]{gbt7714}   % 参考文献格式
+\usepackage{makeidx}         % 索引生成
+% 脚注设置
+\usepackage[perpage,symbol*,bottom]{footmisc} 
+\usepackage{pifont}          % 特殊符号
+% 其他功能宏包
+\usepackage{type1cm}         % 任意字号
+\usepackage{anyfontsize}     % 字号修复
+\usepackage{fancyref}        % 智能引用
+\usepackage{fancybox}        % 装饰框
+\usepackage{pdfpages}        % PDF嵌入
+\usepackage{enumitem}        % 列表控制
+% 超链接和书签
+\usepackage[CJKbookmarks=true,
+            pdfversion=1.6,
+            bookmarksnumbered=true,
+            bookmarksopen=true,
+            colorlinks=false,
+            hidelinks]{hyperref}
+
+
+%% ====== 字体设置 ======
+% 中文字体
+\xeCJKsetup{
+    % 字体与粗体设置
+    boldfont,
+    EmboldenFactor=2,
+    % 换行断句优化 CJKglue
+    CJKglue = {\hskip 0pt plus 0.08\baselineskip},
+    CJKecglue = {\hskip 0pt plus 0.08\baselineskip}
+}
+\setCJKfamilyfont{song}{SimSun}         % 宋体
+\newcommand{\song}{\CJKfamily{song}}
+\setCJKfamilyfont{fs}{FangSong}         % 仿宋
+\newcommand{\fs}{\CJKfamily{fs}}
+\setCJKfamilyfont{kai}{KaiTi}           % 楷体
+\newcommand{\kai}{\CJKfamily{kai}}
+\setCJKfamilyfont{yh}{Microsoft YaHei}  % 微软雅黑
+\newcommand{\yh}{\CJKfamily{yh}}
+\setCJKfamilyfont{hei}{SimHei}          % 黑体
+\newcommand{\hei}{\CJKfamily{hei}}
+% 正文宋体加粗
+\renewcommand{\emph}[1]{\textbf{\CJKfamily{song}#1}}
+% 英文字体
+\setmainfont{Times New Roman}           % 正文字体
+\setsansfont{Arial}                     % 无衬线字体
+\xeCJKsetwidth{[}{0.2em}                % 标点压缩
+% 封面
+\newcommand{\typethesis}{\zihao{-0}\hei}                                % 封面标题    黑体     小初
+\newcommand{\typetitle}{\fontsize{26pt}{50pt}\hei\bfseries\selectfont}  % 论文题目    黑体加粗  一号    1.25倍行距
+\newcommand{\typetimu}{\fontsize{22pt}{50pt}\selectfont}                % “题目”标签  宋体     二号    1.25倍行距
+\newcommand{\typename}{\fontsize{16pt}{32pt}\fs\selectfont}             % 姓名        仿宋     三号    1.25倍行距
+\newcommand{\typexingming}{\fontsize{15pt}{32pt}\hei\selectfont}        % “姓名”标签  黑体     小三    1.25倍行距
+\newcommand{\typedate}{\zihao{3}}                                       % 日期        宋体     三号    1.25倍行距
+% 英文封面
+\newcommand{\typetitleen}{\fontsize{26pt}{48pt}\sffamily\bfseries\selectfont}   % 英文标题  Arial 加粗倾斜 一号 单倍行距
+\newcommand{\typeenglish}{\fontsize{16pt}{22pt}\selectfont}                     % 英文封面  Arial  三号  20磅行距
+\newcommand{\typeenglishlarge}{\fontsize{16pt}{34pt}\selectfont}                % 英文封面  Arial  三号  20磅行距 加段落间距
+% 英文摘要
+\newcommand{\typetitleab}{\fontsize{16pt}{32pt}\sffamily\selectfont}            % 摘要标题 Arial  三号  单倍行距
+\newcommand{\typeab}{\fontsize{12pt}{12pt}\sffamily\selectfont}                 % 英文摘要ABSTRACT Arial 小四号 单倍行距
+% 正文
+\newcommand{\typetext}{\fontsize{12pt}{20pt}\selectfont}                    % 正文  小四    20 磅
+\newcommand{\typechap}{\zihao{3}\linespread{1.64}\hei}                      % “摘要”、各章标题 黑体 三号    单倍行距
+\newcommand{\typesec}{\zihao{4}\linespread{1.2}\hei}                        % 一级标题 黑体 四号    20磅行距
+\newcommand{\typesubsecctex}{\fontsize{13pt}{13pt}\linespread{1.2}\hei}     % 二级标题 黑体 13磅字  20磅行距
+\newcommand{\typesubsubsecctex}{\fontsize{12pt}{12pt}\linespread{1.2}\hei}  % 三级标题 黑体 12磅字  20磅行距
+% 页眉页脚
+\newcommand{\typeyemei}{\fontsize{10.5pt}{20pt}\selectfont}                 %  页眉 宋体 五号   20磅行距
+\newcommand{\typeyemeien}{\fontsize{10.5pt}{20pt}\selectfont}
+\newcommand{\typeyejiao}{\fontsize{10.5pt}{20pt}\selectfont}                %  页脚 英文 五号   20磅行距
+\newcommand{\typefootnote}{\fontsize{9pt}{15.7pt}\selectfont}               %  脚注 小五号  单倍行距
+\newcommand{\typefootscript}{\fontsize{8pt}{8pt}\selectfont}                %  脚注上标 小五号  单倍行距
+\newcommand{\typetable}{\small\renewcommand\arraystretch{1.5}}              %  表格内容 11磅    单倍行距
+\newcommand{\typebib}{\fontsize{10.5pt}{16pt}\selectfont                    %  参考文献 五号    16磅行距
+                      \setlength{\bibsep}{6pt plus 2pt minus 1pt}           %  增加弹性间距
+                      \setlength{\parskip}{3pt}\setlength{\parindent}{0pt}  %  参考文献段落设置 段前空3磅，段后空0磅，首行不缩进
+                      \bibliographystyle{gbt7714-numerical}}                %  参考文献格式（GB/T 7714-2015 数字标注法）
+
+%% ====== 页面布局和格式 ======
+% 标题间距（指南 1.7.1 节）
+\ctexset{
+  chapter = {
+    format = {\typechap\centering},
+    nameformat = {\typechap},
+    aftername = {\hspace*{1em}},
+    titleformat = {\typechap},
+    beforeskip = {-2pt},
+    afterskip = {18pt}
+  },
+  section = {
+    format = {\typesec},
+    nameformat = {\typesec},
+    aftername = {\hspace*{1em}},
+    titleformat = {\typesec},
+    beforeskip = {24pt},
+    afterskip = {6pt}
+  },
+  subsection = {
+    format = {\typesubsecctex},
+    nameformat = {\typesubsecctex},
+    aftername = {\hspace*{1em}},
+    titleformat = {\typesubsecctex},
+    beforeskip = {12pt},
+    afterskip = {6pt}
+  },
+  subsubsection = {
+    format = {\typesubsubsecctex},
+    nameformat = {\typesubsubsecctex},
+    aftername = {\hspace*{1em}},
+    titleformat = {\typesubsubsecctex},
+    beforeskip = {12pt},
+    afterskip = {6pt}
+  }
+}
+% 页眉页脚设置（指南 1.11 节）
+\newcommand{\makeheadrule}{\hrule width\headwidth height0.75pt}
+\pagestyle{fancyplain}
+\fancyhf{}
+% 段落和行距设置
+\setlength{\parskip}{0pt}
+\renewcommand{\baselinestretch}{1}
+\sloppy % 断行间距优化
+% 目录格式（指南 1.5 节）
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{2}
+\renewcommand{\contentsname}{目~~~~录}
+\dottedcontents{chapter}[4em]{\hei\vspace{9pt}}{4em}{5pt}
+\dottedcontents{section}[4.2em]{}{2.2em}{5pt}
+\dottedcontents{subsection}[7em]{}{3em}{5pt}
+% 插图目录 (listoffigures) 格式 
+\renewcommand{\listfigurename}{插图清单}
+\titlecontents{figure}
+  [0em]                 % 左缩进，设为0让“图1.1”顶格开始
+  {\vspace{2pt}\normalfont}     % 条目以上的垂直间距
+  {\makebox[3.8em][l]{图~\thecontentslabel}} % 标签格式：添加“图”前缀，编号后加一个空格
+  {}                    % 无编号条目的格式（通常用不到）
+  {\titlerule*[0.5em]{.}\contentspage} % 引导线（点线）和页码
+  [\vspace{0pt}]     % 条目以下的垂直间距
+% 脚注格式（指南 1.7.3 节）
+\renewcommand{\thefootnote}{}
+\renewcommand{\footnoterule}{\noindent \rule{5cm}{0.6pt} \vspace*{6pt} }
+\renewcommand{\footnotesize}{\typefootnote}
+\renewcommand{\footnotesep}{11pt}
+\newcommand\footnotecircle[1]{\footnote{\hangindent 1.5em \hspace*{-2.2em}
+                                \ding{\numexpr171+\value{footnote}}\hspace*{0.4em} #1}
+                                \textsuperscript{\typefootscript \ding{\numexpr171+\value{footnote}}}} % 带圈数字序号
+% 圈号脚注正文
+\newcommand{\footnotecircletext}[1]{\footnotetext{\hangindent 1.5em \hspace*{-2.2em}
+                                    \ding{\numexpr171+\value{footnote}}\hspace*{0.4em} #1}}
+% 列表格式 
+\setlist[itemize]{itemsep=0.6ex, topsep=0.8ex, partopsep=0pt, parsep=0pt, leftmargin=2.5em, labelsep=0.5em,label=\textbullet} 
+\setlist[enumerate,1]{itemsep=0.6ex, topsep=0.8ex, partopsep=0pt, parsep=0pt, leftmargin=2.5em, labelsep=0.5em,label=(\arabic*)}
+\setlist[description]{itemsep=0.6ex, topsep=0.6ex, partopsep=0pt, parsep=0pt, leftmargin=2.5em, labelsep=0.5em}
+
+
+
+%% ====== 数学和公式环境 ======
+% 数学环境设置
+\allowdisplaybreaks[4] % 允许公式跨页
+% 公式间距调整
+\setlength{\abovedisplayskip}{6pt plus 2pt minus 2pt}
+\setlength{\abovedisplayshortskip}{6pt plus 2pt minus 2pt}
+\setlength{\belowdisplayskip}{6pt plus 2pt minus 2pt}
+\setlength{\belowdisplayshortskip}{6pt plus 2pt minus 2pt}
+% 定理环境
+\theoremstyle{plain}
+\theorembodyfont{\song\rmfamily}
+\theoremheaderfont{\hei\rmfamily}
+\theoremseparator{\ }
+\newtheorem{definition}{\hei 定义}[chapter]
+\newtheorem{proposition}[definition]{\hei 命题}
+\newtheorem{assumption}[definition]{\hei 假设}
+\newtheorem{lemma}[definition]{\hei 引理}
+\newtheorem{remark}[definition]{\hei 注}
+\newtheorem{theorem}[definition]{\hei 定理}
+\newtheorem{axiom}{\hei 公理}
+\newtheorem{corollary}[definition]{\hei 推论}
+\newtheorem{exercise}[definition]{}
+\theoremheaderfont{\CJKfamily{hei}\rmfamily}
+\theorembodyfont{\rmfamily}
+\theoremstyle{nonumberplain}
+\theoremseparator{:}
+\theoremsymbol{$\blacksquare$}
+\newtheorem{proof}{\hei 证明}
+\theoremsymbol{$\square$}
+\newtheorem{example}{\hei 例}
+
+
+%% ====== 图表和浮动对象设置 =======
+% 浮动对象参数（指南要求）
+\renewcommand{\textfraction}{0.15}
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\bottomfraction}{0.65}
+\renewcommand{\floatpagefraction}{0.60}
+% 图表标题格式
+\captionsetup[table]{labelsep=quad,format=hang,justification=centerlast,
+                    font={small,stretch=1.16},position=top,
+                    belowskip={15pt-\intextsep},aboveskip=6pt}
+\captionsetup[figure]{labelsep=quad,format=hang,justification=centerlast,
+                    font={small,stretch=1.16},position=bottom,
+                    belowskip={10pt-\intextsep},aboveskip=6pt}
+\captionsetup[subfigure]{labelsep=space,format=hang,justification=centerlast,
+                        font={small,stretch=1.16},position=bottom,
+                        belowskip=-2pt,aboveskip=6pt}
+% 表格线宽设置
+\setlength{\heavyrulewidth}{1.25pt}
+\setlength{\lightrulewidth}{0.5pt}
+\setlength{\abovetopsep}{0pt}
+\setlength{\belowbottomsep}{-3pt}
+
+
+
+%% ====== 其他实用命令 ======
+\newcommand{\comment}[1]{}        % 块注释命令
+\newcommand{\longer}[2]{#1}       % 版本控制标志
+\newcommand{\ds}{\displaystyle}   % 显示样式数学
+\def\gs{1.0}                      % 图形比例
+\newcommand{\worddot}[1]{#1%      % 中文着重符
+            \rlap{\raisebox{-1.5ex}{\hspace{-0.68em}\textperiodcentered}}} 
+
+
+%% ====== 自定义环境 ======
+% 自定义谚语环境
+\newsavebox{\AphorismAuthor}
+\newenvironment{Aphorism}[1]
+{\vspace{0.5cm}\begin{sloppypar} \slshape
+\sbox{\AphorismAuthor}{#1}
+\begin{quote}\small\itshape }
+{\\ \hspace*{\fill}------\hspace{0.2cm} \usebox{\AphorismAuthor}
+\end{quote}
+\end{sloppypar}\vspace{0.5cm}}
+% 自定义列表环境
+\newcounter{newlist} % 自定义新计数器
+\newenvironment{denselist}[1][temp]{
+\begin{list}{\textbf{#1} (\arabic{newlist})} % 标签格式
+    {\usecounter{newlist}
+     \setlength{\labelwidth}{22pt} % 标签盒子宽度
+     \setlength{\labelsep}{0cm} % 标签与列表文本距离
+     \setlength{\leftmargin}{0cm} % 左右边界
+     \setlength{\rightmargin}{0cm}
+     \setlength{\parsep}{0ex} % 段落间距
+     \setlength{\itemsep}{0ex} % 标签间距
+     \setlength{\itemindent}{44pt} % 标签缩进量
+     \setlength{\listparindent}{44pt} % 段落缩进量
+    }}
+{\end{list}}
+% 定义符号对照表环境
+\newenvironment{denotation}[1][3.5cm]{%
+    \chapter*{符号和缩略语说明}%
+    \markboth{符号和缩略语说明}{}%
+    \begin{description}[
+        nosep,
+        font=\normalfont,
+        align=left,
+        leftmargin=!,
+        labelindent=5pt,
+        labelwidth=#1,
+        labelsep*=0.2cm,
+        itemindent=0pt,
+        before={\zihao{-4}\setlength{\baselineskip}{20pt}}
+    ]
+}{%
+    \end{description}%
+}
+
+%% ====== 自定义命令 ======
+\makeatletter %% 注意：以下开始使用 @ 符号
+% 偶数页插入空白页（无页眉页脚）
+\def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else%
+    \hbox{}%
+    \thispagestyle{empty}% Empty header styles
+    \newpage%
+    \if@twocolumn\hbox{}\newpage\fi\fi\fi}
+
+% 表格辅助命令
+\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
+
+
+%% ====== 封面和摘要命令定义 ======
+% 中文封面信息
+\def\ctitlefirstline#1{\def\@ctitlefirstline{#1}}\def\@ctitlefirstline{}
+\def\ctitlesecondline#1{\def\@ctitlesecondline{#1}}\def\@ctitlesecondline{}
+\def\cdegree#1{\def\@cdegree{#1}}\def\@cdegree{}
+\def\caffil#1{\def\@caffil{#1}}\def\@caffil{}
+\def\csubject#1{\def\@csubject{#1}}\def\@csubject{}
+\def\cauthor#1{\def\@cauthor{#1}}\def\@cauthor{}
+\def\cnumber#1{\def\@cnumber{#1}}\def\@cnumber{}
+\def\csubsub#1{\def\@csubsub{#1}}\def\@csubsub{}
+\def\csupervisor#1{\def\@csupervisor{#1}}\def\@csupervisor{}
+\def\cassosupervisor#1{\def\@cassosupervisor{~ & 副指导教师 & ：& #1\\}}\def\@cassosupervisor{}
+\def\ccosupervisor#1{\def\@ccosupervisor{~ & 联\hfill合\hfill导\hfill 师 & ：& #1\\}}\def\@ccosupervisor{}
+\def\cdate#1{\def\@cdate{#1}}\def\@cdate{}
+\long\def\cabstract#1{\long\def\@cabstract{#1}}\long\def\@cabstract{}
+\def\ckeywords#1{\def\@ckeywords{#1}}\def\@ckeywords{}
+% 英文封面信息
+\def\etitle#1{\def\@etitle{#1}}\def\@etitle{}
+\def\edegree#1{\def\@edegree{#1}}\def\@edegree{}
+\def\eaffil#1{\def\@eaffil{#1}}\def\@eaffil{}
+\def\esubject#1{\def\@esubject{#1}}\def\@esubject{}
+\def\edepartment#1{\def\@edepartment{#1}}\def\@edepartment{}
+\def\eauthor#1{\def\@eauthor{#1}}\def\@eauthor{}
+\def\exuewei#1{\def\@exuewei{#1}}\def\@exuewei{}
+\def\esupervisor#1{\def\@esupervisor{#1}}\def\@esupervisor{}
+\def\eassosupervisor#1{\def\@eassosupervisor{Associate Supervisor: & #1\\}}\def\@eassosupervisor{}
+\def\ecosupervisor#1{\def\@ecosupervisor{~ & #1\\}}\def\@ecosupervisor{}
+\def\edate#1{\def\@edate{#1}}\def\@edate{}
+\long\def\eabstract#1{\long\def\@eabstract{#1}}\long\def\@eabstract{}
+\def\ekeywords#1{\def\@ekeywords{#1}}\def\@ekeywords{}
+
+% 封面生成命令（指南 1.1 节）
+\def\makecover{
+    \begin{titlepage}
+        % 中文封面
+        \newpage
+        \thispagestyle{empty}
+        \begin{center} {
+            \vspace*{3mm}
+            \includegraphics[width=8.5cm]{logo.eps} \\
+            \vspace*{4mm}
+            {\typethesis \@cdegree 研究生学位论文} \\
+            \vspace*{8mm}
+            {\typetimu \hspace*{-1cm}
+                \begin{tabular}{lc}
+                    \raisebox{-2mm}{题目：} & {\typetitle \@ctitlefirstline} \\ \cline{2-2}
+                        & {\typetitle \@ctitlesecondline} \\ \cline{2-2}
+                    　 　 & {\hspace*{9cm}}　
+                \end{tabular} } \\
+                \vspace*{2.2cm}
+                {\typexingming \hspace*{-2cm}
+                \begin{tabular}{lc}
+                    姓\hphantom{姓名}名： \hspace*{1mm}& {\typename \@cauthor}\\ \cline{2-2}
+                    学\hphantom{姓名}号： & {\typename \@cnumber}\\ \cline{2-2}
+                    院\hphantom{姓名}系： & {\typename \@caffil}\\ \cline{2-2}
+                    专\hphantom{姓名}业： & {\typename \@csubject}\\ \cline{2-2}
+                    研究方向： & {\typename \@csubsub}\\ \cline{2-2}
+                    导师姓名： & {\typename \@csupervisor} \\ \cline{2-2}
+                    　 　 & {\hspace*{6.5cm}}　
+                \end{tabular} } \\
+            \typedate $\Box\hspace{-0.7em}\raisebox{0.2ex}{\scalebox{0.9}{$\checkmark$}}\hspace{0.2em}$ 学术学位      \hspace{1.0cm}  $\Box$ 专业学位\\
+            \vspace*{1.2cm}
+            \typedate \@cdate
+            }
+        \end{center}
+        % 英文封面
+        \cleardoublepage
+        \newpage
+        \thispagestyle{empty}
+        \begin{center}
+            \vspace*{-0.5cm}%\vspace*{-1.2cm}
+            {\typetitleen
+            \begin{center} { \@etitle} \end{center}}
+            \vspace*{2cm}
+            {\typeenglish
+            Dissertation Submitted to \\
+            \textbf{Peking University} \\
+            \vspace*{0.6cm}
+            \textbf{In partial fulfillment of the requirements for the degree of} \\
+            \@edegree \\
+            \vspace*{2.2cm}
+            By \\
+            \textbf{\@eauthor}\textbf{\@exuewei}
+            \\
+            \textbf{(\@esubject)} \\}
+            \vspace*{0.8cm}
+            {\typeenglishlarge
+            Dissertation Supervisor: \textbf{\@esupervisor} \\ \quad \\
+            \@edepartment \\
+            School of Advanced Manufacturing and Robotics \\
+            Peking University \\
+            \@edate, Beijing \\}
+        \end{center}
+
+        \cleardoublepage
+        \newpage
+        \thispagestyle{empty}
+    \end{titlepage}
+}
+% 摘要生成命令（指南 1.3-1.4 节）
+\def\makeabstract{
+    \begin{titlepage}
+        \newpage
+        \thispagestyle{plain}
+        \chapter*{摘~~~~要 \markboth{摘~~~~要}{摘~~~~要}}
+        %\addcontentsline{toc}{chapter}{\hei {摘~~~~要}}
+        \setcounter{page}{1}
+        {\typetext \@cabstract }
+        \cleardoublepage
+        \newpage
+        \thispagestyle{plain} % 页眉上不出现文字
+        \markboth{\typeyemeien ABSTRACT}{\typeyemeien ABSTRACT}
+        %\addcontentsline{toc}{chapter}{\hei Abstract}
+        \begin{center}
+            % 英文摘要标题
+            %{\typetitleab
+            %\begin{center} 
+            %    {\@etitle}
+            %\end{center}}
+            %\vspace*{8mm}
+            %{\typetext
+            %\@eauthor\ (\@esubject) \\
+            %Directed by \@esupervisor \\[3mm]}
+            \vspace*{0.5em}
+            {\typeab \textbf{ABSTRACT}}
+        \end{center}
+        \typetext
+        \@eabstract
+        \cleardoublepage
+    \end{titlepage}
+}
+
+% 盲审封面生成命令
+\def\ctitleBR#1{\def\@ctitleBR{#1}}\def\@ctitleBR{}
+\def\etitleBR#1{\def\@etitleBR{#1}}\def\@etitleBR{}
+\def\firstclassmajorBR#1{\def\@firstclassmajorBR{#1}}\def\@firstclassmajorBR{}
+\def\secondclassmajorBR#1{\def\@secondclassmajorBR{#1}}\def\@secondclassmajorBR{}
+\def\thesisindexBR#1{\def\@thesisindexBR{#1}}\def\@thesisindexBR{}
+\def\makecoverBR{
+\begin{titlepage}
+    \newpage
+    \thispagestyle{empty}
+    \begin{center} {
+        \vspace*{3mm}
+        {\typethesis 北京大学博士学位论文}\\[5mm]
+        \Large{(匿名评阅论文封面)}\\
+        \vspace*{3cm}
+        \begin{flushleft}
+            {\typexingming
+            中文题目：{\typename \@ctitleBR}\\
+            \begin{minipage}[t]{\linewidth}
+                \setlength{\parindent}{0pt}
+                英文题目：\hspace{0.1em}\parbox[t]{\dimexpr\linewidth-3cm}{
+                        \setlength{\parindent}{0pt}
+                        \setlength{\leftskip}{0pt}
+                        \setlength{\parskip}{0pt}
+                        \typename \@etitleBR}
+            \end{minipage}
+            ~\\[2cm]
+            一级学科：{\typename \@firstclassmajorBR}\\ 
+            二级学科：{\typename \@secondclassmajorBR}\\ 
+            论文编号：{\typename \@thesisindexBR}\\
+            }
+        \end{flushleft}}
+        \vspace*{3.0cm}
+        \typedate $\Box\hspace{-0.7em}\raisebox{0.2ex}{\scalebox{0.9}{$\checkmark$}}\hspace{0.2em}$ 学术学位      \hspace{1.0cm}  $\Box$ 专业学位\\
+        \vspace*{2.0cm}
+        %\hspace{8.0cm}
+        \typedate \@cdate
+        %\footnote{* 匿名评审的博士学位论文使用统一格式的封页；字体、字号与排版格式、幅面大小应与正式论文相同，评阅后的学位论文可重新装订，制作成正式格式论文。}
+        %\footnote{匿名评审的博士学位论文内容应包含以下内容：\textcircled{1}与封页统一格式的扉页；\textcircled{2}中文摘要（大约300～500字，3-5个关键词，一页为宜）；\textcircled{3}英文摘要（内容与中文摘要相同，3-5个关键词，一页为宜）；\textcircled{4}目录；\textcircled{5}正文（包括文献综述、引言、注释和结论）；\textcircled{6}参考文献；\textcircled{7}与论文相关而不带有个人色彩的学术内容的附件。注意：论文中不可包含致谢、攻读博士期间发表论文目录、随感、杂论等任何透露本文作者和导师姓名的信息。}
+        %\footnote{送审时，该三段脚注文字均需删除。修改在setup/COEformat.tex文件中。}
+    \end{center}
+    % 封二 空白页
+    \cleardoublepage
+    \newpage
+    \thispagestyle{empty}
+\end{titlepage}
+}
+% 盲审摘要生成命令
+\def\makeabstractBR{
+    \begin{titlepage}
+        \newpage
+        \thispagestyle{plain}
+        \chapter*{摘~~~~要 \markboth{摘~~~~要}{摘~~~~要}}
+        \setcounter{page}{1}
+        \renewcommand{\footnotecircle}[1]{}
+        {\typetext \@cabstract }
+        \cleardoublepage
+        \newpage
+        \thispagestyle{plain} % 页眉上不出现文字
+        \markboth{\typeyemeien ABSTRACT}{\typeyemeien ABSTRACT}
+        \vspace*{-5mm}
+        \begin{center}
+            % 英文摘要标题
+            {\typetitleab
+            \begin{center} 
+                {\@etitleBR}
+            \end{center}}
+            \vspace*{8mm}
+            %{\typeab \textbf{ABSTRACT}}
+        \end{center}
+        \typetext
+        \@eabstract
+        \cleardoublepage
+    \end{titlepage}
+}
+\makeatother %% 注意：结束使用 @ 符号
+
+
+%% ====== 全局设置 ======
+% 图形路径设置
+\graphicspath{{figures/}}
+% 底部对齐
+\raggedbottom
+\setlength{\multlinegap}{0mm}
+
+
+% 盲审版本开关
+\newif\ifblindreview
+\blindreviewfalse % 默认关闭（生成正式版本）
+% 定义切换命令
+\newcommand{\setblindreview}[1]{
+    \ifnum#1=1
+        \blindreviewtrue
+    \else
+        \blindreviewfalse
+    \fi
+}

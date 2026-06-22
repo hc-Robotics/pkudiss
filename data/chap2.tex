@@ -1,0 +1,82 @@
+% !TeX encoding = UTF-8
+% !TeX spellcheck = en_US
+% !Mode:: "TeX:UTF-8"
+% 文字编码：UTF-8
+\chapter[图表和公式示例]{图表和公式示例\protect\footnotecircle{图标题在图下方，表标题在表上方。图表序号分章设置，如图3.15表示第三章第15幅图。}}
+
+本章给出图表和公式的示例。
+
+图片标题在图片下方。
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[scale=0.35]{figure_A.pdf}
+  \caption{单张图片}
+  \label{fig:single_figure}
+\end{figure}
+
+图表序号分章设置，如图\ref{fig:single_figure}表示第二章第1幅图。
+
+\begin{figure}[htbp]
+  \begin{subfigure}[b]{0.49\linewidth}
+    \centering
+    \includegraphics[scale=0.35]{figure_A.pdf}
+    \caption{初始能量$E=1$的能量曲线}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.49\linewidth}
+    \centering
+    \includegraphics[scale=0.35]{figure_B.pdf}
+    \caption{初始能量$E=100$的能量曲线}
+  \end{subfigure}
+  \caption{由两个子图组成的图}
+  \label{fig:two_figures}
+\end{figure}
+
+如果一个图由两个或两个以上分图组成时，各分图分别以(a)、(b)、(c)……作为图序，并须有分图名。
+
+以上是单张图片和由两个子图组成的图片示例。
+
+下面给出表格的示例。
+
+表格的标题在表格上方。
+
+\begin{table}[htbp]
+  \typetable
+  \centering  
+  \def~{\hphantom{0}}
+  \caption{表格的例子}
+  \label{tab:list}
+  \begin{tabular}{ccc}
+    \toprule
+    类型 & 线性稳定性临界参数 & 能量稳定性临界参数 \\
+    \midrule
+    平面Poiseuille流 & 5772.22 & 49.60  \\
+    平面Couette流 & 稳定 & 20.7 \\
+    管流 & 对于轴对称扰动稳定 & 81.49 \\
+    Rayleigh--Bernard对流 & 657.5 & 657.5 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+图片和表格的详细说明见第3.7.4节。
+
+行内公式示例：设远场流体温度稳定分层梯度的大小为$N$，则竖直方向高度为$s$的流体温度为$T_{\infty}(s)=T_{\infty}(0)+N s$。设斜板壁面在$s$高度处的温度总比同一高度处的流体温度高出一个固定值，远场流体静止，壁面处无滑移。
+
+行间公式示例：
+\begin{equation}
+\label{eq:Boussinesq}
+  \left\{
+  \begin{aligned}
+    & \frac{\partial u}{\partial x} + \frac{\partial v}{\partial y}=0, \\
+    & \frac{\partial u}{\partial t} + \bm{u \cdot \nabla} u = - \frac{\partial p}{\partial x} + \frac{1}{\mbox{\textit{Re}}} \bm{\nabla}^2 u, \\
+    & \frac{\partial v}{\partial t} + \bm{u \cdot \nabla} v = - \frac{\partial p}{\partial y} + \frac{1}{\mbox{\textit{Re}}} \bm{\nabla}^2 v.
+  \end{aligned}
+\right.
+\end{equation}
+
+Latex中数学字体的输入方法：斜体$U$，斜体加粗$\bm{U}$，直立体加粗$\mathbf{U}$，实数集$\mathbb{R}$，希腊字母的加粗$\bm{\Lambda}$。有的常数和函数名需要写成直立体，例如$\mathop{\rm Im}\; \mathrm{e}^{\mathrm{i}\theta} = \sin\theta$。
+%可以考虑利用newcommand和def来缩写上面的式子，例如“\newcommand{\me}{\mathrm{e}}”以及“\def\Imag{\mathop{\rm Im}\;}”
+
+\bigskip
+\cjkhl{yellow} {图例和表头的结尾都不推荐有句号，如果实在觉得需要，请保持全文统一，都有句号，或者都没有句号。}
+
