@@ -1,0 +1,29 @@
+{
+  "latex-workshop.latex.outDir": "_build",
+  "latex-workshop.latex.auxDir": "_build",
+  "latex-workshop.latex.recipe.default": "xelatexmk",
+  "latex-workshop.latex.autoBuild.run": "onSave",
+  "latex-workshop.message.dvipdfmxlog.exclude": [
+    "Object @page\\.[0-9]+ already defined",
+    "Object @Hfootnote\\.[0-9]+ already defined",
+    "Object @equation\\.[0-9]"
+  ],
+  "latex-workshop.latex.recipes": [
+    { "name": "xelatexmk", "tools": ["xelatexmk"] }
+  ],
+  "latex-workshop.latex.tools": [
+    {
+      "name": "xelatexmk",
+      "command": "latexmk",
+      "args": [
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "-xelatex",
+        "-outdir=%OUTDIR%",
+        "-auxdir=%AUXDIR%",
+        "%DOC%"
+      ]
+    }
+  ]
+}
