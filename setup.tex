@@ -265,8 +265,9 @@
 \newcommand{\longer}[2]{#1}       % 版本控制标志
 \newcommand{\ds}{\displaystyle}   % 显示样式数学
 \def\gs{1.0}                      % 图形比例
-\newcommand{\worddot}[1]{#1%      % 中文着重符
-            \rlap{\raisebox{-1.5ex}{\hspace{-0.68em}\textperiodcentered}}} 
+\newcommand{\checkedbox}{$\Box\hspace{-0.7em}% 封面勾选学位类型
+            \raisebox{0.2ex}{\scalebox{0.9}{$\checkmark$}}\hspace{0.2em}$}
+\newcommand{\uncheckedbox}{$\Box\hspace{0.2em}$}
 
 
 %% ====== 自定义环境 ======
@@ -311,6 +312,30 @@
     ]
 }{%
     \end{description}%
+}
+
+%% ====== 版本开关定义 ======
+% 盲审版本开关
+\newif\ifblindreview
+\blindreviewfalse % 默认关闭（生成正式版本）
+% 定义切换命令
+\newcommand{\setblindreview}[1]{
+    \ifnum#1=1
+        \blindreviewtrue
+    \else
+        \blindreviewfalse
+    \fi
+}
+% 学位类型开关
+\newif\ifacademic
+\academictrue % 默认学术学位
+% 定义切换命令
+\newcommand{\setacademic}[1]{
+    \ifnum#1=1
+        \academictrue
+    \else
+        \academicfalse
+    \fi
 }
 
 %% ====== 自定义命令 ======
@@ -386,7 +411,12 @@
                     导师姓名： & {\typename \@csupervisor} \\ \cline{2-2}
                     　 　 & {\hspace*{6.5cm}}　
                 \end{tabular} } \\
-            \typedate $\Box\hspace{-0.7em}\raisebox{0.2ex}{\scalebox{0.9}{$\checkmark$}}\hspace{0.2em}$ 学术学位      \hspace{1.0cm}  $\Box$ 专业学位\\
+            \typedate 
+            \ifacademic 
+                \checkedbox 学术学位 \hspace{1.0cm} \uncheckedbox 专业学位
+            \else
+                \uncheckedbox 学术学位 \hspace{1.0cm} \checkedbox 专业学位
+            \fi\\
             \vspace*{1.2cm}
             \typedate \@cdate
             }
@@ -491,9 +521,13 @@
             }
         \end{flushleft}}
         \vspace*{3.0cm}
-        \typedate $\Box\hspace{-0.7em}\raisebox{0.2ex}{\scalebox{0.9}{$\checkmark$}}\hspace{0.2em}$ 学术学位      \hspace{1.0cm}  $\Box$ 专业学位\\
+        \typedate 
+        \ifacademic 
+                \checkedbox 学术学位 \hspace{1.0cm} \uncheckedbox 专业学位
+            \else
+                \uncheckedbox 学术学位 \hspace{1.0cm} \checkedbox 专业学位
+            \fi\\
         \vspace*{2.0cm}
-        %\hspace{8.0cm}
         \typedate \@cdate
         %\footnote{* 匿名评审的博士学位论文使用统一格式的封页；字体、字号与排版格式、幅面大小应与正式论文相同，评阅后的学位论文可重新装订，制作成正式格式论文。}
         %\footnote{匿名评审的博士学位论文内容应包含以下内容：\textcircled{1}与封页统一格式的扉页；\textcircled{2}中文摘要（大约300～500字，3-5个关键词，一页为宜）；\textcircled{3}英文摘要（内容与中文摘要相同，3-5个关键词，一页为宜）；\textcircled{4}目录；\textcircled{5}正文（包括文献综述、绪论、注释和结论）；\textcircled{6}参考文献；\textcircled{7}与论文相关而不带有个人色彩的学术内容的附件。注意：论文中不可包含致谢、攻读博士期间发表论文目录、随感、杂论等任何透露本文作者和导师姓名的信息。}
@@ -544,14 +578,3 @@
 \setlength{\multlinegap}{0mm}
 
 
-% 盲审版本开关
-\newif\ifblindreview
-\blindreviewfalse % 默认关闭（生成正式版本）
-% 定义切换命令
-\newcommand{\setblindreview}[1]{
-    \ifnum#1=1
-        \blindreviewtrue
-    \else
-        \blindreviewfalse
-    \fi
-}
