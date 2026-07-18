@@ -74,10 +74,9 @@
 
 %% 参考文献（指南 1.8 节）
 \phantomsection
-%\nocite{*}
 \addcontentsline{toc}{chapter}{参考文献}
-{\typebib
- \bibliography{data/reference}}
+%\nocite{*} % 此命令会列出BibTeX中所有文献（含正文中未引用的），请慎用！
+{\typebib\bibliography{data/reference}}
 \cleardoublepage
 
 %% 附录（指南 1.9 节）
@@ -87,20 +86,20 @@
 \end{appendix}
 \cleardoublepage
 
-%% 个人简历、在学期间成果
+%% 个人简历、在学期间成果；致谢（仅在正式版本中包含）
 \ifblindreview
-    \include{data/resumeBR} % 盲审版本
+    % 在学期间成果（盲审版本）
+    \include{data/resumeBR}
 \else
-    \include{data/resume}   % 正式版本
+    % 个人简历、在学期间成果（正式版本）
+    \include{data/resume}
     \cleardoublepage
-\fi
-
-%% 致谢和原创性声明（仅在正式版本中包含）
-\ifblindreview
-    % 盲审版本跳过此部分
-\else
-    %% 致谢（指南 1.10 节）
-    \include{data/acknowledgements}\cleardoublepage
+    % 致谢（仅正式版包含）
+    \include{data/acknowledgements}
+    \cleardoublepage
+    % 原创性声明（仅正式版包含）
+    \includepdf{Authority.pdf}
+    \cleardoublepage
 \fi
 
 \end{document}

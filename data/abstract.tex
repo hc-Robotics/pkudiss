@@ -9,21 +9,22 @@
 本文采用了……
 
 研究表明……
-
-使用说明：
-
-1. 主文件为COEmain.tex，里面可详细看到对应封面，致谢，出版情况与个人简历对应的文件。
-
-2. 默认指定使用图片在figures文件夹内，如现在使用的北大logo（logo.eps）、版权声明（copyright2.pdf）以及北京大学学位论文原创性声明和使用授权说明（Authority2.pdf）。
-
-3. 参考文献使用基于BIB文件管理，建议对应的BIB代码使用学术谷歌统一标定。
-
-4. 编译软件大家可以选择使用CTEX或TEXLIVE,需要保证完全安装。编译过程是一次xelatex命令后，再文献编译bibtex一次，再xelatex两次，即可查看pdf结果。
-
-5. 当论文中包含大量eps格式的图片时，xelatex编译时间较长；将所有eps图片的格式转为pdf可以显著缩短编译时间。
-
-6. 打印生成的pdf时，为了保证与学院Word模板相同的效果，请选择“实际大小”或者“自定义比例100\%”。
 \smallskip
+
+pkuDiss（PKU Dissertations） 是一套面向北京大学研究生学位论文的 \LaTeX{} 模板。
+模板遵循研究生院学位论文写作指南，并基于先进制造与机器人学院的格式审查完成适配。
+简要使用说明如下：
+
+（1） 模板主文件为 \texttt{main.tex}，构建封面、正文、参考文献、附录、个人简历、致谢等学位论文主体结构，相应文件置于 \texttt{data} 目录。
+
+（2） 插图及附页置于 \texttt{figures} 文件夹内，如封面北京大学图标 \texttt{figures/logo.eps}、版权声明 \texttt{figures/copyright.pdf} 以及原创性声明页 \texttt{figures/Authority.pdf}。
+
+（3） 参考文献基于 BibTeX 生成，相关文献代码置于 \texttt{data/reference.bib}。
+
+（4） \LaTeX{} 编译可采用本地或云端方式，如 {\color{red}{ TeX Live + VS Code + LaTeX Workshop 本地编译（推荐）}} 或 Overleaf 云端编译，详见 \texttt{README.md} 相关说明。
+
+（5） 建议采用 pdf 格式插图，可显著提高编译效率，并确保插图清晰。
+\smallskip\smallskip
 
 {\color{red}{英文培养项目学生使用英文写学位论文，中文摘要应不少于6000字。}}
 
@@ -31,7 +32,7 @@
 
 \vfill
 
-关键词：关键词1，关键词2，关键词3，……{\color{red}{关键词需要置底}}
+\noindent 关键词：关键词1，关键词2，关键词3，…… {\color{red}{ (关键词须置底顶格)}}
 }
 
 
@@ -44,5 +45,5 @@ In environmental economics, environmental resources including environmental qual
 
 \vfill
 
-KEYWORDS: Key word 1, Key word 2, Key word 3, ……
+\noindent KEYWORDS: Key word 1, Key word 2, Key word 3, ……
 }
