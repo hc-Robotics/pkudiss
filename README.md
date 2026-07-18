@@ -1,6 +1,6 @@
 # pkuDiss - 北京大学研究生学位论文 LaTeX 模板
 
-pkuDiss 是 **Peking University Dissertation LaTeX Template** 的缩写，提供了一套符合北京大学研究生学位论文（现阶段主要为博士学位论文）排版要求的 LaTeX 模板。模板严格遵循学校相关规范，并特别针对 **北京大学先进制造与机器人学院** 的格式要求进行了精细适配。
+pkuDiss 是 **Peking University Dissertation LaTeX Template** 的缩写，提供了一套符合北京大学研究生学位论文（现阶段主要为博士学位论文）排版要求的 LaTeX 模板。模板严格遵循学校相关规范，并针对 **北京大学先进制造与机器人学院** 的格式要求进行适配。
 
 ## 主要特性
 
@@ -18,7 +18,7 @@ pkuDiss 是 **Peking University Dissertation LaTeX Template** 的缩写，提供
 - 编辑器建议使用 **VS Code**，并安装扩展 **LaTeX Workshop**。
 - Python 3.x（仅在使用 `reflist.py` 工具时需用，非必须）。
 
-### 本地编译（VS Code + LaTeX Workshop）
+### 本地编译（TeX Live + VS Code + LaTeX Workshop）
 
 1. **安装 TeX Live**  
    推荐安装最新版 TeX Live（需包含 XeLaTeX 与 `latexmk`）。  
@@ -31,53 +31,49 @@ pkuDiss 是 **Peking University Dissertation LaTeX Template** 的缩写，提供
    ```
 
 
-3. **使用 VS Code 打开项目** 
+3. **使用 VS Code 打开项目**  
+   安装扩展 LaTeX Workshop。
 
-安装扩展 LaTeX Workshop。
-
-4. **自动编译配置** 
-
-工作路径下 .vscode/settings.json 已为配置如下：
-```json
-{
-  "latex-workshop.latex.outDir": "_build",
-  "latex-workshop.latex.auxDir": "_build",
-  "latex-workshop.latex.recipe.default": "xelatexmk",
-  "latex-workshop.latex.autoBuild.run": "onSave",
-  "latex-workshop.latex.recipes": [
-    { "name": "xelatexmk", "tools": ["xelatexmk"] }
-  ],
-  "latex-workshop.latex.tools": [
+4. **自动编译配置**  
+   工作路径下 .vscode/settings.json 已为配置如下：
+    ```json
     {
-      "name": "xelatexmk",
-      "command": "latexmk",
-      "args": [
-        "-synctex=1",
-        "-interaction=nonstopmode",
-        "-file-line-error",
-        "-xelatex",
-        "-outdir=%OUTDIR%",
-        "-auxdir=%AUXDIR%",
-        "%DOC%"
+      "latex-workshop.latex.outDir": "_build",
+      "latex-workshop.latex.auxDir": "_build",
+      "latex-workshop.latex.recipe.default": "xelatexmk",
+      "latex-workshop.latex.autoBuild.run": "onSave",
+      "latex-workshop.latex.recipes": [
+        { "name": "xelatexmk", "tools": ["xelatexmk"] }
+      ],
+      "latex-workshop.latex.tools": [
+        {
+          "name": "xelatexmk",
+          "command": "latexmk",
+          "args": [
+            "-synctex=1",
+            "-interaction=nonstopmode",
+            "-file-line-error",
+            "-xelatex",
+            "-outdir=%OUTDIR%",
+            "-auxdir=%AUXDIR%",
+            "%DOC%"
+          ]
+        }
       ]
     }
-  ]
-}
-```
-默认编译器为 XeLaTeX（中文支持）。
+    ```
+    - 默认编译器为 XeLaTeX（中文支持）。
 
-保存 .tex 文件即自动编译，类似 Overleaf 体验。
+    - 保存 .tex 文件即自动编译，类似 Overleaf 体验。
 
-编译产物（包括 PDF）统一存放在 _build/ 子目录，根目录保持清爽。
+    - 编译产物（包括 PDF）统一存放在 _build/ 子目录，根目录保持清爽。
 
-5. **开始写作** 
-
-打开主文件（如 thesis.tex 或 main.tex），修改内容，保存后即可在 _build/ 下得到 PDF。
-若需手动编译，可在终端执行：
-
-```bash
-latexmk -xelatex -outdir=_build -auxdir=_build main.tex
-```
+5. **开始写作**  
+    打开主文件（如 thesis.tex 或 main.tex），修改内容，保存后即可在 _build/ 下得到 PDF。
+    若需手动编译，可在终端执行：
+    ```bash
+    latexmk -xelatex -outdir=_build -auxdir=_build main.tex
+    ```
 
 ## 使用 Overleaf 云端编译
 1. 下载本仓库的 ZIP 压缩包。
@@ -100,7 +96,6 @@ latexmk -xelatex -outdir=_build -auxdir=_build main.tex
 
 - **序号控制**：输出默认带 [1] [2] … 序号，也可生成无序号列表。
 
-使用方法
 ```bash
 # 自动查找 .bbl，生成带序号的 reflist.txt
 python utilities/reflist.py
@@ -117,7 +112,7 @@ python utilities/reflist.py --no-numbered
 ## 反馈与贡献
 遇到任何问题，或者有改进建议，欢迎通过以下方式交流：
 
-- **GitHub Issues**：https://github.com/your-org/pkuDiss/issues
+- **GitHub Issues**：https://github.com/hc-Robotics/pkuDiss/issues
 
 - **邮件**：hc.robotic@gmail.com
 
@@ -125,11 +120,7 @@ python utilities/reflist.py --no-numbered
 
 ## 致谢
 本模板建立在早期多位北大 LaTeX 模板维护者的工作之上，感谢他们的付出。当前版本特别依据 北京大学先进制造与机器人学院 的详细格式要求进行了适配，并已通过相关审查。
-
 感谢所有提供反馈和帮助的老师和同学。
-
-## 许可证
-本项目采用 MIT 许可证。
 
 提示：不同院系可能有个性化的格式规定，请以北京大学研究生院发布的最新官方文件为准，并适当调整模板样式。本模板力求通用且易定制。
 
